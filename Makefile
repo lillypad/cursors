@@ -28,7 +28,7 @@ install_cookies:
 
 uninstall_cookies:
 	cd ~/.icons/ && \
-		rm -rf lillypad/
+		rm -rf cookies/
 
 clean_cookies:
 	cd dist/ && \
