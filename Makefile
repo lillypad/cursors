@@ -1,22 +1,38 @@
-all:
-	mkdir cookies/
-	cd cookies/ && \
-		mkdir cursors/
-	xcursorgen -p img/cookies/ cursors.conf cookies/cursors/right_ptr
-	echo "[Icon Theme]" > cookies/cursor.theme
-	echo "Name=cookies" >> cookies/cursor.theme
-	cd cookies/cursors/ && \
-		ln -s right_ptr arrow && \
-		ln -s right_ptr draft_large && \
-		ln -s right_ptr draft_small
+.PHONY: all
+.PHONY: build_cookies
+.PHONY: install
+.PHONY: uninstall
 
-install:
+all: cookies symlinks
+
+build_cookies: cookies symlinks
+
+install: install_cookies
+
+uninstall: uninstall_cookies
+
+cookies:
+	mkdir dist/
+	cd dist/ && \
+		mkdir -p cookies/cursors/
+	xcursorgen -p src/cookies/img/ src/cookies/config/default.conf dist/cookies/cursors/default
+	xcursorgen -p src/cookies/img/ src/cookies/config/pointer.conf dist/cookies/cursors/pointer
+	cp src/cookies/index.theme dist/cookies/index.theme
+
+symlinks:
+	./build.sh
+
+install_cookies:
 	mkdir -p ~/.icons/
-	cp -r cookies/ ~/.icons/cookies/
+	cp -r dist/cookies/ ~/.icons/cookies/
 
-uninstall:
+uninstall_cookies:
 	cd ~/.icons/ && \
+		rm -rf lillypad/
+
+clean_cookies:
+	cd dist/ && \
 		rm -rf cookies/
 
 clean:
-	rm -rf cookies/
+	rm -rf dist/
