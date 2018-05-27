@@ -26,8 +26,19 @@ function build_cookies(){
     fi
 }
 
+function build_animaljam(){
+    src_symlinks=src/animaljam/symlinks
+    dist_cursors=dist/animaljam/cursors/
+    if [ -d "$dist_cursors" ]; then
+        echo "[-] building cookies theme symlinks"
+        build_symlinks $src_symlinks $dist_cursors
+        echo "[*] cookies theme symlinks done"
+    fi
+}
+
 function main(){
     build_cookies
+    build_animaljam
 }
 
 main
