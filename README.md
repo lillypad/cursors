@@ -1,6 +1,6 @@
 # cursors
 
-Collection of my own X cursors
+Collection of my own X cursors.
 
 # Setup
 
